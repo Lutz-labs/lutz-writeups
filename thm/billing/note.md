@@ -75,7 +75,7 @@ Response delay ±5 detik → confirmed.
 ```
 use linux/http/magnusbilling_unauth_rce_cve_2023_30258
 ```
-
+dengan memakai script dri https://github.com/tinashelorenzi/CVE-2023-30258-magnus-billing-v7-exploit
 Meterpreter session diperoleh sebagai user `asterisk`.
 
 ---
