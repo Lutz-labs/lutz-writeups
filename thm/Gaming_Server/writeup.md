@@ -13,7 +13,7 @@ Diawali dengan nmap untuk melihat service apa saja yang berjalan
 nmap -sC -sV TARGET -T4
 ```
 
-![nmap](images/nmap.png)
+![nmap](img/nmap.png)
 
 Ditemukan:
 - 22/tcp → SSH
@@ -31,7 +31,7 @@ Web server jadi attack surface utama.
 curl http://TARGET
 ```
 
-![source](images/source.png)
+![source](img/source.png)
 
 Ditemukan komentar:
 
@@ -45,7 +45,7 @@ Kandidat Username : `john`
 
 ### /uploads Directory
 
-![uploads](images/uploads.png)
+![uploads](img/uploads.png)
 
 Directory listing aktif, ditemukan:
 - `dict.lst` (wordlist)
@@ -55,7 +55,7 @@ Directory listing aktif, ditemukan:
 
 ### Wordlist Reuse
 
-![wordlist](images/wordlist.png)
+![wordlist](img/wordlist.png)
 
 Alih-alih pakai wordlist generic, di case ini menggunakan wordlist dari target untuk enumerasi.
 
@@ -69,7 +69,7 @@ Ini sering jadi intentional hint di CTF.
 gobuster dir -u http://TARGET -w dict.lst
 ```
 
-![gobuster](images/gobuster.png)
+![gobuster](img/gobuster.png)
 
 Ditemukan endpoint:
 ```
@@ -80,7 +80,7 @@ Ditemukan endpoint:
 
 ### RSA Private Key
 
-![rsa](images/rsa.png)
+![rsa](img/rsa.png)
 
 Di dalam `/secret` terdapat RSA private key yang terenkripsi.
 
@@ -95,7 +95,7 @@ ssh2john id_rsa > hash.txt
 john --wordlist=dict.lst hash.txt
 ```
 
-![john](images/john.png)
+![john](img/john.png)
 
 Passphrase:
 ```
@@ -120,7 +120,7 @@ ssh -i id_rsa john@TARGET
 cat user.txt
 ```
 
-![user](images/user.png)
+![user](img/user.png)
 
 ---
 
@@ -178,7 +178,7 @@ id
 cat /root/root.txt
 ```
 
-![root](images/root.png)
+![root](img/root.png)
 
 ---
 
