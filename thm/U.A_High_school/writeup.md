@@ -86,7 +86,7 @@ Ini mengindikasikan RCE melalui celah command injection pada parameter URL.
 Setelah command execution tervalidasi, langkah berikutnya adalah memperoleh interactive shell.
 
 ```bash
-curl "http://10.48.136.242/assets/index.php?cmd=<PAYLOAD>"
+curl "http://<TARGET_IP>/assets/index.php?cmd=<PAYLOAD>"
 ```
 Payload sebelum URL encoding:
 
@@ -160,11 +160,7 @@ xxd oneforall.jpg | head
 00000000: 8950 4e47 0d0a 1a0a  →  PNG header
 ```
 
-File berekstensi `.jpg` tapi magic bytes-nya adalah PNG — ini tidak normal dan mengindikasikan file ini telah dimanipulasi atau disembunyikan sesuatu di dalamnya. Header diperbaiki menggunakan MagicBytes tool dari GitHub.
-
-```
-[MagicBytes](https://github.com/Haxrein/MagicBytes)
-```
+File berekstensi `.jpg` tapi magic bytes-nya adalah PNG — ini tidak normal dan mengindikasikan file ini telah dimanipulasi atau disembunyikan sesuatu di dalamnya. Header diperbaiki menggunakan MagicBytes tool [MagicBytes](https://github.com/Haxrein/MagicBytes)
 
 ![magicbyte](images/magicbyte.png)
 
@@ -233,7 +229,7 @@ else
 fi
 ```
 
-Berbeda dengan echo, eval akan melakukan parsing ulang terhadap string yang diterimanya sebagai sebuah perintah shell. Akibatnya operator shell seperti >> tidak dicetak sebagai teks biasa, tetapi diproses sebagai operator redirection. Ada filter yang memblokir banyak karakter berbahaya, namun `/` dan `>` tidak difilter. Dua karakter ini sudah cukup untuk menulis ke file arbitrary sebagai root.
+Berbeda dengan `echo`, `eval` akan melakukan parsing ulang terhadap string yang diterimanya sebagai sebuah perintah shell. Akibatnya operator shell seperti >> tidak dicetak sebagai teks biasa, tetapi diproses sebagai operator redirection. Ada filter yang memblokir banyak karakter berbahaya, namun `/` dan `>` tidak difilter. Dua karakter ini sudah cukup untuk menulis ke file arbitrary sebagai root.
 
 Rencananya: jalankan script sebagai root, lalu gunakan input untuk menambahkan deku ke `/etc/sudoers`.
 
@@ -246,7 +242,7 @@ Input saat diminta feedback:
 ```
 deku ALL=NOPASSWD: ALL >>/etc/sudoers
 ```
-Payload tersebut tidak menjalankan command tambahan, tetapi memanfaatkan operator >> yang masih lolos dari filter untuk menambahkan baris baru ke file /etc/sudoers sebagai root.
+Payload tersebut tidak menjalankan command tambahan, tetapi memanfaatkan operator `>>` yang masih lolos dari filter untuk menambahkan baris baru ke file `/etc/sudoers` sebagai root.
 
 Verifikasi:
 
